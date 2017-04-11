@@ -1,0 +1,69 @@
+#pragma once
+
+enum class EC_ConstNUM
+{
+	E_BACKGROUND_WIDTH = 1024,
+	E_BACKGROUND_HEIGHT = 768,
+
+	E_PLAYER_WIDTH = 50,
+	E_PLAYER_HEIGHT = 50,
+	
+	E_PLAYER_DEFAULT_XPOS = 50,
+	E_PLAYER_DEFAULT_YPOS = 50,
+	E_PLAYER_UP_XPOS = 50,
+	E_PLAYER_UP_YPOS = 0,
+	E_PLAYER_UPRIGHT_XPOS = 100,
+	E_PLAYER_UPRIGHT_YPOS = 0,
+	E_PLAYER_RIGHT_XPOS = 100,
+	E_PLAYER_RIGHT_YPOS = 50,
+	E_PLAYER_DOWNRIGHT_XPOS = 100,
+	E_PLAYER_DOWNRIGHT_YPOS = 100,
+	E_PLAYER_DOWN_XPOS = 50,
+	E_PLAYER_DOWN_YPOS = 100,
+	E_PLAYER_DOWNLEFT_XPOS = 0,
+	E_PLAYER_DOWNLEFT_YPOS = 100,
+	E_PLAYER_LEFT_XPOS = 0,
+	E_PLAYER_LEFT_YPOS = 50,
+	E_PLAYER_UPLEFT_XPOS = 0,
+	E_PLAYER_UPLEFT_YPOS = 0,
+
+	E_BULLET_WIDTH = 20,
+	E_BULLET_HEIGHT = 20,
+
+	E_BULLET_TYPE1_XPOS = 0,
+	E_BULLET_TYPE2_XPOS = 20,
+	E_BULLET_TYPE3_XPOS = 40,
+	E_BULLET_TYPE4_XPOS = 60,
+	E_BULLET_TYPE5_XPOS = 80,
+};
+
+class C_OBJMGR
+{
+public:
+	enum E_ObjTYPE
+	{
+		E_BACKGROUND,
+		E_PLAYER,
+		E_BULLET_TYPE1,
+		E_BULLET_TYPE2,
+		E_BULLET_TYPE3,
+		E_BULLET_TYPE4,
+		E_BULLET_TYPE5,
+		E_MAX
+	};
+private:
+	std::unordered_set<C_OBJECT*> m_ObjectSet[E_MAX];
+	
+public:
+	C_OBJMGR();
+	
+	C_OBJECT*	createObj			(E_ObjTYPE eObjType);
+	objmap_citer	destroyObj			(E_ObjTYPE eObjType, objmap_citer pObj);
+	void		destroyAllObj		(E_ObjTYPE eObjType);
+	void		updateAllObj		();
+
+	objmap_citer	getBeginIter		(E_ObjTYPE eObjType);
+	objmap_citer	getEndIter			(E_ObjTYPE eObjType);
+
+	UINT		getSize				(E_ObjTYPE eObjType);
+};
